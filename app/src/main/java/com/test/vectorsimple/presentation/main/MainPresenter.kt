@@ -2,26 +2,57 @@ package com.test.vectorsimple.presentation.main
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.test.vectorsimple.domain.logic.VectorLogic
+import com.test.vectorsimple.domain.logic.VectorShape
 
 @InjectViewState
-class MainPresenter : MvpPresenter<MainView>() {
-    fun onAddFigureClicked() {
-        setEditMode(true)
+class MainPresenter : MvpPresenter<MainView>(), VectorLogic.OnVectorLogicUpdateListener {
+    private val mVectorLogic = VectorLogic(this)
+
+    fun onAddShapeClicked() {
+        mVectorLogic.addShape()
     }
 
-    fun onSaveFigureClicked() {
-        setEditMode(false)
+    fun onSaveShapeClicked() {
+        mVectorLogic.saveShape()
     }
 
-    fun onDeleteFigureClicked() {
-        setEditMode(false)
+    fun onDeleteShapeClicked() {
+        mVectorLogic.deleteShape()
     }
 
-    private fun setEditMode(edit: Boolean) {
-        viewState.onShowAddFigureButton(!edit)
-        viewState.onShowSaveFigureButton(edit)
-        viewState.onShowDeleteFigureButton(edit)
-        viewState.onShowPointTooltip(edit)
-        //viewState.onEnableSaveFigureButton()
+    fun onSurfaceSingleTap(x: Float, y: Float) {
+        mVectorLogic.handleSingleTap(x, y)
+    }
+
+    fun onSurfaceDoubleTap(x: Float, y: Float) {
+        mVectorLogic.handleDoubleTap(x, y)
+    }
+
+    fun onSurfaceMove(x: Float, y: Float) {
+        mVectorLogic.handleMove(x, y)
+    }
+
+    private fun showEditMode(show: Boolean) {
+        viewState.onShowAddShapeButton(!show)
+        viewState.onShowSaveShapeButton(show)
+        viewState.onShowDeleteShapeButton(show)
+        viewState.onShowPointTooltip(show)
+    }
+
+    private fun enableSaveButton(enable: Boolean) {
+        viewState.onEnableSaveShapeButton(enable)
+    }
+
+    override fun onSetEditMode(edit: Boolean) {
+        showEditMode(edit)
+    }
+
+    override fun onAllowSave(save: Boolean) {
+        enableSaveButton(save)
+    }
+
+    override fun onUpdateShapes(shapes: List<VectorShape>) {
+        viewState.onUpdateShapes(shapes)
     }
 }

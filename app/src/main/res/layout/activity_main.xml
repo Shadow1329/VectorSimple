@@ -29,14 +29,14 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <Button
-            android:id="@+id/addFigureButton"
+            android:id="@+id/addShapeButton"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:text="Add"
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <Button
-            android:id="@+id/saveFigureButton"
+            android:id="@+id/saveShapeButton"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:text="Save"
@@ -44,12 +44,12 @@
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <Button
-            android:id="@+id/deleteFigureButton"
+            android:id="@+id/deleteShapeButton"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:text="Delete"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/saveFigureButton" />
+            app:layout_constraintBottom_toTopOf="@id/saveShapeButton" />
 
     </android.support.constraint.ConstraintLayout>
 

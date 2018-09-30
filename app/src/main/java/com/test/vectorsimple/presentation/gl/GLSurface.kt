@@ -3,7 +3,7 @@ package com.test.vectorsimple.presentation.gl
 import android.content.Context
 import android.opengl.GLSurfaceView
 import android.util.AttributeSet
-import android.view.MotionEvent
+import com.test.vectorsimple.domain.logic.VectorShape
 
 class GLSurface : GLSurfaceView {
 
@@ -16,16 +16,8 @@ class GLSurface : GLSurfaceView {
         renderMode = RENDERMODE_WHEN_DIRTY
     }
 
-    override fun onTouchEvent(e: MotionEvent): Boolean {
-        val x: Float = e.x
-        val y: Float = e.y
-
-        when (e.action) {
-            MotionEvent.ACTION_DOWN -> {
-                mRenderer.addPoint(x, y)
-                requestRender()
-            }
-        }
-        return true
+    fun updateShapes(shapes: List<VectorShape>) {
+        mRenderer.updateShapes(shapes)
+        requestRender()
     }
 }
