@@ -1,5 +1,7 @@
 package com.test.vectorsimple.domain.logic
 
+import java.util.*
+
 class VectorLogic(listener: OnVectorLogicUpdateListener) {
     private val mShapes = mutableListOf<VectorShape>()
     private val mListener = listener
@@ -32,7 +34,7 @@ class VectorLogic(listener: OnVectorLogicUpdateListener) {
         }
     }
 
-    fun handleDoubleTap(x: Float, y: Float) {
+    fun handleLongPress(x: Float, y: Float) {
         if (isEditing()) {
             deletePoint(x, y)
         }
@@ -45,7 +47,7 @@ class VectorLogic(listener: OnVectorLogicUpdateListener) {
     }
 
     private fun checkSelection(x: Float, y: Float) {
-        for (i in 0 until mShapes.size) {
+        for (i in mShapes.size - 1 downTo 0) {
             if (mShapes[i].isInside(x, y)) {
                 startEditShape(i)
                 break
@@ -89,7 +91,10 @@ class VectorLogic(listener: OnVectorLogicUpdateListener) {
     }
 
     private fun startEditShape(shapeNumber: Int) {
-        mEditingShape = shapeNumber
+        val shape = mShapes[shapeNumber]
+        mShapes.removeAt(shapeNumber)
+        mShapes.add(shape)
+        mEditingShape = mShapes.size - 1
         mShapes[mEditingShape].mEdit = true
         checkSavable()
         mListener.onSetEditMode(true)

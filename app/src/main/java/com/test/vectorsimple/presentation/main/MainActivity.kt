@@ -2,6 +2,7 @@ package com.test.vectorsimple.presentation.main
 
 import android.os.Bundle
 import android.support.v4.view.GestureDetectorCompat
+import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
@@ -37,33 +38,32 @@ class MainActivity : MvpAppCompatActivity(), MainView, GestureDetector.OnGesture
 
     override fun onShowPress(e: MotionEvent?) {}
 
-    override fun onSingleTapUp(e: MotionEvent?): Boolean { return true }
-
     override fun onDown(e: MotionEvent?): Boolean { return true }
 
     override fun onFling(e1: MotionEvent?, e2: MotionEvent?, p2: Float, p3: Float): Boolean { return true }
 
-    override fun onLongPress(e: MotionEvent?) {}
-
     override fun onDoubleTapEvent(e: MotionEvent?): Boolean { return true }
 
-    override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
+    override fun onSingleTapConfirmed(e: MotionEvent?): Boolean { return true }
+
+    override fun onDoubleTap(e: MotionEvent?): Boolean { return true }
+
+    override fun onSingleTapUp(e: MotionEvent?): Boolean {
         e?.run {
             mMainPresenter.onSurfaceSingleTap(e.x, e.y)
         }
         return true
     }
 
+    override fun onLongPress(e: MotionEvent?) {
+        e?.run {
+            mMainPresenter.onSurfaceLongPress(e.x, e.y)
+        }
+    }
+
     override fun onScroll(e1: MotionEvent?, e2: MotionEvent?, p2: Float, p3: Float): Boolean {
         e2?.run {
             mMainPresenter.onSurfaceMove(e2.x, e2.y)
-        }
-        return true
-    }
-
-    override fun onDoubleTap(e: MotionEvent?): Boolean {
-        e?.run {
-            mMainPresenter.onSurfaceDoubleTap(e.x, e.y)
         }
         return true
     }

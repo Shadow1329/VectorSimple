@@ -25,8 +25,8 @@ class MainPresenter : MvpPresenter<MainView>(), VectorLogic.OnVectorLogicUpdateL
         mVectorLogic.handleSingleTap(x, y)
     }
 
-    fun onSurfaceDoubleTap(x: Float, y: Float) {
-        mVectorLogic.handleDoubleTap(x, y)
+    fun onSurfaceLongPress(x: Float, y: Float) {
+        mVectorLogic.handleLongPress(x, y)
     }
 
     fun onSurfaceMove(x: Float, y: Float) {

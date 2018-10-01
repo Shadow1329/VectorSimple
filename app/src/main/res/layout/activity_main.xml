@@ -16,8 +16,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Tap the screen to add point"
+        android:text="Tap the screen to add point\nDrag point to move\nLong tap on point to remove it\nYou can save shape only with 3 or more points"
         android:visibility="gone"
+        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -33,6 +34,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:text="Add"
+            android:background="@drawable/button_round"
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <Button
@@ -40,6 +42,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:text="Save"
+            android:background="@drawable/button_round"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -47,7 +50,9 @@
             android:id="@+id/deleteShapeButton"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:layout_marginBottom="10dp"
             android:text="Delete"
+            android:background="@drawable/button_round"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/saveShapeButton" />
 

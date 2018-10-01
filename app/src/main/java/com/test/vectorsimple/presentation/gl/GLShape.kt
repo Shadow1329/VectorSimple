@@ -9,7 +9,6 @@ class GLShape {
     companion object {
         private const val COORDINATES_PER_VERTEX = 2
         private const val CIRCLE_POINTS = 32
-        private val mShapeColor = floatArrayOf(0.0f, 1.0f, 0.0f, 1.0f)
         private val mCircleColor = floatArrayOf(0.0f, 0.5f, 0.8f, 0.3f)
         private val mPointsColor = floatArrayOf(1.0f, 0.0f, 0.0f, 1.0f)
 
@@ -17,16 +16,16 @@ class GLShape {
             // Draw shape
             val shapeCoordinates = mutableListOf<Float>()
             shape.mPoints.forEach {
-                shapeCoordinates.add(it.first)
-                shapeCoordinates.add(it.second)
+                shapeCoordinates.add(it.mX)
+                shapeCoordinates.add(it.mY)
             }
-            GLShape.drawPolygon(shapeCoordinates.toFloatArray(), matrix, mShapeColor)
+            GLShape.drawPolygon(shapeCoordinates.toFloatArray(), matrix, shape.mColor)
 
             // Draw points
             if (shape.mEdit) {
                 shape.mPoints.forEach {
-                    GLShape.drawCircle(it.first, it.second, VectorShape.DRAG_RADIUS, matrix, mCircleColor)
-                    GLShape.drawCircle(it.first, it.second, VectorShape.POINT_RADIUS, matrix, mPointsColor)
+                    GLShape.drawCircle(it.mX, it.mY, VectorShape.DRAG_RADIUS, matrix, mCircleColor)
+                    GLShape.drawCircle(it.mX, it.mY, VectorShape.POINT_RADIUS, matrix, mPointsColor)
                 }
             }
         }
